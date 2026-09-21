@@ -1,0 +1,206 @@
+Building for debugging...
+[Computing dependencies]
+[Constructing description]
+[Pre-planning 1 / 767]
+[Planning deferred tasks]
+[Starting]
+[2 / 6] PulseCore
+[3 / 7] PulseCore
+[6 / 10] PulseCart
+[7 / 11] PulseCart
+[10 / 14] PulseCheckout
+[11 / 15] PulseCheckout
+[16 / 20] ViewInspector
+[17 / 21] ViewInspector
+[20 / 24] SnapshotTesting
+[21 / 25] SnapshotTesting
+[27 / 31] PulseCore
+[30 / 34] PulseCart
+[34 / 38] PulseCheckout
+[46 / 50] ViewInspector
+[57 / 61] SnapshotTesting
+[60 / 63] PulseCheckoutTests-product
+[65 / 68] PulseCheckoutTests-product
+[67 / 68] PulseCheckoutTests-product
+[72 / 76] PulseFeed
+[73 / 77] PulseFeed
+[82 / 86] PulseFeed
+[86 / 89] PulseFeedTests-product
+[90 / 93] PulseFeedTests-product
+[92 / 93] PulseFeedTests-product
+[97 / 101] InternalCollectionsUtilities
+[98 / 102] InternalCollectionsUtilities
+[101 / 105] OrderedCollections
+[102 / 106] OrderedCollections
+[106 / 110] ContainersPreview
+[109 / 113] DequeModule
+[110 / 114] DequeModule
+[113 / 117] AsyncAlgorithms
+[114 / 118] AsyncAlgorithms
+[117 / 121] PulseSearch
+[118 / 122] PulseSearch
+[132 / 134] InternalCollectionsUtilities
+[143 / 145] OrderedCollections
+[154 / 156] ContainersPreview
+[165 / 167] DequeModule
+[176 / 178] AsyncAlgorithms
+[180 / 182] PulseSearch
+[184 / 187] PulseSearchTests-product
+[189 / 192] PulseSearchTests-product
+[191 / 192] PulseSearchTests-product
+[202 / 217] PulseLegacy
+[208 / 223] PulseLegacy
+[219 / 221] PulseDebug
+Build complete! (16,42 sec)
+Test Suite 'All tests' started at 2026-09-21 23:50:47.135.
+Test Suite 'All tests' passed at 2026-09-21 23:50:47.143.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.008) seconds
+Test Suite 'All tests' started at 2026-09-21 23:50:47.287.
+Test Suite 'All tests' passed at 2026-09-21 23:50:47.294.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.007) seconds
+Test Suite 'All tests' started at 2026-09-21 23:50:47.445.
+Test Suite 'All tests' passed at 2026-09-21 23:50:47.453.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.008) seconds
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "FlowLayout" started.
+􀟈  Suite "Orden de respuestas de búsqueda" started.
+􀟈  Suite "Mediciones del FlowLayout" started.
+􀟈  Test "El flow salta de línea cuando no cabe" started.
+􀟈  Test "La última respuesta corresponde a la última consulta" started.
+􀟈  Test "El layout no vuelve a medir las etiquetas en cada llamada" started.
+􀟈  Test "Un solo elemento más ancho que el contenedor no salta de línea" started.
+􀟈  Test case passing 1 argument ancho → 280.0 to "El flow salta de línea cuando no cabe" started.
+􀟈  Test case passing 1 argument ancho → 320.0 to "El flow salta de línea cuando no cabe" started.
+􀟈  Test case passing 1 argument ancho → 390.0 to "El flow salta de línea cuando no cabe" started.
+􁁛  Test "Un solo elemento más ancho que el contenedor no salta de línea" passed after 0.097 seconds.
+􁁛  Test "El flow salta de línea cuando no cabe" with 3 test cases passed after 0.097 seconds.
+􁁛  Suite "FlowLayout" passed after 0.098 seconds.
+V9 — etiquetas: 60 · sizeThatFits: 7 · placeSubviews: 2 · mediciones de subvistas: 540
+􀢄  Test "El layout no vuelve a medir las etiquetas en cada llamada" recorded an issue at FlowLayoutMedicionTests.swift:34:9: Expectation failed: c.medicionesDeSubvistas < sinCache
+􀄵  mide en cada llamada: 540 mediciones = 60 × 9 llamadas
+􀄵  c.medicionesDeSubvistas < sinCache → false
+􀄵    c.medicionesDeSubvistas → 540
+􀄵    sinCache → 540
+􀢄  Test "El layout no vuelve a medir las etiquetas en cada llamada" failed after 0.247 seconds with 1 issue.
+􀢄  Suite "Mediciones del FlowLayout" failed after 0.247 seconds with 1 issue.
+􀄵  // Libro: cap. 7, §7.3 y §7.9 (V9). cap7-bug falla, cap7-fix pasa.
+􀄵  // (El tag `.bug` ya está declarado en OrdenRespuestasTests.swift, en este mismo módulo.)
+􀢄  Test "La última respuesta corresponde a la última consulta" recorded an issue at OrdenRespuestasTests.swift:47:9: Expectation failed: modelo.resultados.contains { $0.id == "q-zap" }
+􀄵  esperaba el resultado de la última consulta; resultados = ["q-za"]
+􀄵  modelo.resultados.contains { $0.id == "q-zap" } → <not evaluated>
+􀢄  Test "La última respuesta corresponde a la última consulta" recorded an issue at OrdenRespuestasTests.swift:49:9: Expectation failed: !modelo.resultados.contains { $0.id == "q-za" }
+􀄵  una respuesta de una consulta anterior ha sobrescrito a la actual
+􀄵  !modelo.resultados.contains { $0.id == "q-za" } → <not evaluated>
+􀄵    modelo.resultados.contains { $0.id == "q-za" } → <not evaluated>
+􀢄  Test "La última respuesta corresponde a la última consulta" failed after 0.523 seconds with 2 issues.
+􀢄  Suite "Orden de respuestas de búsqueda" failed after 0.524 seconds with 2 issues.
+􀄵  // Libro: cap. 9, §9.9 — dos respuestas fuera de orden (V14). cap9-bug falla, cap9-fix pasa.
+􀄵  //
+􀄵  // AVISO DE DISEÑO (hallazgo de revisión externa): la primera versión de este test esperaba
+􀄵  // solo a `t1.value` y `t2.value` antes de comprobar `resultados`. En la variante con bug eso
+􀄵  // era insuficiente: `buscar()` delega en una `Task` NO estructurada, así que `t1`/`t2` terminan
+􀄵  // en cuanto la han creado y el test comprobaba un `resultados` todavía vacío. Fallaba en `bug`,
+􀄵  // sí, pero por prematuridad, no por desorden — justo lo que §9.9 dice demostrar.
+􀄵  //
+􀄵  // Esta versión espera a que todo el trabajo en vuelo haya terminado (incluidas las tareas
+􀄵  // internas que `t1.cancel()` no alcanza en la variante con bug) antes de afirmar nada. Así:
+􀄵  //   - cap9-fix: t1 se cancela y su escritura queda descartada por el guard → gana "zap".
+􀄵  //   - cap9-bug: la Task interna de "za" sobrevive a la cancelación y, por ser más lenta,
+􀄵  //     escribe DESPUÉS que la de "zap" → gana "za" → el test falla por desorden real.
+􀢄  Test run with 4 tests in 3 suites failed after 0.524 seconds with 3 issues.
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Identidad en ForEach" started.
+􀟈  Suite "FeedModel" started.
+􀟈  Test "Insertar al principio no mueve el estado de una fila a otra" started.
+􀟈  Test "Un ping que solo cambia campos invisibles no invalida" started.
+􀟈  Test "Un cambio que la interfaz sí muestra invalida" started.
+􀢄  Test "Un ping que solo cambia campos invisibles no invalida" recorded an issue at FeedModelTests.swift:54:9: Expectation failed: notificado == false
+􀄵  notificado == false → false
+􀄵    notificado → true
+􁁛  Test "Un cambio que la interfaz sí muestra invalida" passed after 0.145 seconds.
+􀢄  Test "Un ping que solo cambia campos invisibles no invalida" failed after 0.145 seconds with 1 issue.
+􀢄  Suite "FeedModel" failed after 0.145 seconds with 1 issue.
+􀄵  // Libro: cap. 8, §8.8, tras H10.
+􀄵  //
+􀄵  // Lo que se prueba NO es "reasignar lo mismo no notifica": eso lo garantiza Observation y pasaría
+􀄵  // en las dos variantes. Se prueba que un ping que cambia un campo que la interfaz NO muestra
+􀄵  // (`vistas`) no invalide a los observadores. cap8-bug publica el payload crudo → notifica → falla.
+􀢄  Test "Insertar al principio no mueve el estado de una fila a otra" recorded an issue at IdentidadTests.swift:36:9: Expectation failed: RegistroIdentidad.desajustes.isEmpty
+􀄵  // El caso: ninguna fila puede mostrar un artículo distinto del que la creó.
+􀄵  filas reutilizadas para otro artículo (nació para → muestra): ["A→Promoción", "B→A", "C→B"]
+􀄵  RegistroIdentidad.desajustes.isEmpty → false
+􀄵    RegistroIdentidad.desajustes → [(mostrado: "Promoción", nacidaPara: "A"), (mostrado: "A", nacidaPara: "B"), (mostrado: "B", nacidaPara: "C")]
+􀄵    isEmpty → false
+􀢄  Test "Insertar al principio no mueve el estado de una fila a otra" failed after 0.263 seconds with 1 issue.
+􀢄  Suite "Identidad en ForEach" failed after 0.263 seconds with 1 issue.
+􀄵  // Libro: cap. 2, §2.10–2.11 (V2). cap2-bug falla, cap2-fix pasa.
+􀄵  // (El tag `.bug` ya está declarado en FeedModelTests.swift, en este mismo módulo.)
+􀢄  Test run with 3 tests in 2 suites failed after 0.263 seconds with 2 issues.
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Checkout" started.
+􀟈  Suite "FeatureFlags en el entorno" started.
+􀟈  Suite "Ownership del modelo de checkout" started.
+􀟈  Test "El total incluye envío cuando no llega al mínimo" started.
+􀟈  Test "Sin inyección, la vista no aborta" started.
+􀟈  Test "Con inyección, la vista no aborta (control)" started.
+􀟈  Test "Notifica al añadir" started.
+􀟈  Test "El total no incluye envío a partir del mínimo" started.
+􀟈  Test "La vista sigue usando el mismo modelo cuando el padre se actualiza" started.
+􀟈  Test "Formato de precio" started.
+􀟈  Test "Aplicar cupón inválido lanza" started.
+􀟈  Test case passing 2 arguments centimos → 1999, parteNumerica → "19,99" to "Formato de precio" started.
+􀟈  Test case passing 2 arguments centimos → 100000, parteNumerica → "1000,00" to "Formato de precio" started.
+􀟈  Test case passing 2 arguments centimos → 0, parteNumerica → "0,00" to "Formato de precio" started.
+􁁛  Test "Notifica al añadir" passed after 0.001 seconds.
+CheckoutView: @self, @identity, _flags changed.
+􁁛  Test "El total incluye envío cuando no llega al mínimo" passed after 0.136 seconds.
+􀢄  Test "Sin inyección, la vista no aborta" recorded an issue at FeatureFlagsTests.swift:25:15: Expectation failed: expected exit status ".success", but ".signal(SIGTRAP)" was reported instead
+􀄵  .success → .signal(SIGTRAP)
+􀄵    SIGTRAP → 5
+􀢄  Test "Sin inyección, la vista no aborta" failed after 0.137 seconds with 1 issue.
+􀄵  // Caso discriminante del capítulo 5:
+􀄵  //   cap5-fix: `@Environment(FeatureFlags.self) var x: FeatureFlags?` + `.porDefecto`
+􀄵  //             → sin inyección, la vista se evalúa y el hijo termina bien → PASA.
+􀄵  //   cap5-bug: `@Environment(FeatureFlags.self) var flags` (no opcional)
+􀄵  //             → sin inyección, SwiftUI llama a fatalError → el hijo aborta → FALLA.
+􀄵  // El fallo queda contenido en el proceso hijo: el resto de suites sigue ejecutándose.
+􁁛  Test "El total no incluye envío a partir del mínimo" passed after 0.137 seconds.
+􁁛  Test "Aplicar cupón inválido lanza" passed after 0.137 seconds.
+􁁛  Test "Formato de precio" with 3 test cases passed after 0.137 seconds.
+􁁛  Suite "Checkout" passed after 0.138 seconds.
+􁁛  Test "Con inyección, la vista no aborta (control)" passed after 0.143 seconds.
+􀢄  Suite "FeatureFlags en el entorno" failed after 0.143 seconds with 1 issue.
+CheckoutView: \FeatureFlags.bannerPromo, @self changed.
+CheckoutView: \FeatureFlags.bannerPromo, @self changed.
+CheckoutView: \FeatureFlags.bannerPromo, @self changed.
+CheckoutView: \FeatureFlags.bannerPromo, @self changed.
+CheckoutView: \FeatureFlags.bannerPromo, @self changed.
+􀢄  Test "La vista sigue usando el mismo modelo cuando el padre se actualiza" recorded an issue at OwnershipTests.swift:46:9: Expectation failed: RegistroCheckout.enUso == primero
+􀄵  modelos construidos: 3 → 8
+􀄵  RegistroCheckout.enUso == primero → false
+􀄵    RegistroCheckout.enUso → ObjectIdentifier(0x0000000c431c4370)
+􀄵      some → ObjectIdentifier(0x0000000c431c4370)
+􀄵        _value → (Opaque Value)
+􀄵    primero → ObjectIdentifier(0x0000000c4302d900)
+􀄵      _value → (Opaque Value)
+􀢄  Test "La vista sigue usando el mismo modelo cuando el padre se actualiza" failed after 0.360 seconds with 1 issue.
+􀢄  Suite "Ownership del modelo de checkout" failed after 0.360 seconds with 1 issue.
+􀄵  // Libro: cap. 10, §10.6.
+􀄵  //
+􀄵  // H6: comparar identidades con `inspect().actualView()` sin `ViewHosting` NO funciona: cada
+􀄵  // inspección construye la struct de cero y lee el `@State` fuera de cualquier pase de render.
+􀄵  // H11: contar instancias tampoco sirve como criterio, porque con `@State` asignado en el `init`
+􀄵  // el inicializador se ejecuta en cada reconstrucción de la struct aunque el estado se conserve
+􀄵  // (capítulo 3, §3.3). Lo que distingue `fix` de `bug` es QUÉ INSTANCIA usa la vista, registrada
+􀄵  // desde el propio `body` (ver `RegistroCheckout` en CheckoutModel.swift / CheckoutView.swift).
+􀢄  Test run with 8 tests in 3 suites failed after 0.360 seconds with 2 issues.
+Note: Some test targets reported failures:
+  - PulseSearchTests (Swift Testing)
+  - PulseFeedTests (Swift Testing)
+  - PulseCheckoutTests (Swift Testing)

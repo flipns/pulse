@@ -36,10 +36,11 @@ jobs:
           grep -q "Suite \"Orden de respuestas de búsqueda\" failed" bug.log || { echo "::error::cap9 no falló"; fallo=1; }
           grep -q "Suite \"FeedModel\" failed" bug.log                     || { echo "::error::cap8 no falló"; fallo=1; }
           grep -q "Suite \"Ownership del modelo de checkout\" failed" bug.log || { echo "::error::cap3/10 no falló"; fallo=1; }
+          grep -q "Suite \"FeatureFlags en el entorno\" failed" bug.log    || { echo "::error::cap5 no falló"; fallo=1; }
 
           # 2. Ninguna otra suite puede haber fallado.
           inesperadas=$(grep -oE 'Suite "[^"]+" failed' bug.log \
-            | grep -vE 'Orden de respuestas de búsqueda|FeedModel|Ownership del modelo de checkout' || true)
+            | grep -vE 'Orden de respuestas de búsqueda|FeedModel|Ownership del modelo de checkout|FeatureFlags en el entorno' || true)
           if [ -n "$inesperadas" ]; then
             echo "::error::han fallado suites no esperadas:"; echo "$inesperadas"; fallo=1
           fi

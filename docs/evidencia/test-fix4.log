@@ -1,0 +1,118 @@
+Building for debugging...
+[Computing dependencies]
+[Pre-planning 1 / 767]
+[Planning deferred tasks]
+[Starting]
+[46 / 103] PulseSearchTests-product
+[52 / 105] PulseFeedTests-product
+[53 / 201]
+[63 / 213]
+[69 / 213]
+[81 / 237]
+[95 / 237]
+[102 / 237]
+[108 / 237] PulseSearchTests-product
+[118 / 237] PulseSearchTests-product
+[123 / 237]
+[129 / 237]
+[132 / 237]
+[134 / 237]
+[135 / 237]
+[154 / 237]
+[157 / 237]
+[160 / 237]
+[168 / 237]
+[169 / 237]
+[170 / 237]
+[183 / 237]
+[184 / 237]
+[195 / 237] ViewInspector
+[196 / 237] SnapshotTesting
+[198 / 237] SnapshotTesting
+[209 / 237] ViewInspector-product
+[210 / 237] ViewInspector-product
+[211 / 237] ViewInspector-product
+[213 / 237] SnapshotTesting-product
+[214 / 237] SnapshotTesting-product
+[218 / 237] SnapshotTesting
+[220 / 237] SnapshotTesting
+[220 / 237] ViewInspector
+[222 / 237] SnapshotTesting
+[227 / 238] PulseCheckoutTests-product
+[238 / 261]
+[241 / 261]
+[243 / 261]
+[244 / 261]
+[250 / 261] PulseCheckoutTests-product
+[255 / 261] PulseCheckoutTests-product
+[257 / 261] PulseCheckoutTests-product
+Build complete! (9,66 sec)
+Test Suite 'All tests' started at 2026-09-21 12:34:32.839.
+Test Suite 'All tests' passed at 2026-09-21 12:34:32.847.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.008) seconds
+Test Suite 'All tests' started at 2026-09-21 12:34:33.222.
+Test Suite 'All tests' passed at 2026-09-21 12:34:33.234.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.011) seconds
+Test Suite 'All tests' started at 2026-09-21 12:34:33.907.
+Test Suite 'All tests' passed at 2026-09-21 12:34:33.915.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.008) seconds
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "FlowLayout" started.
+􀟈  Suite "Orden de respuestas de búsqueda" started.
+􀟈  Test "Un solo elemento más ancho que el contenedor no salta de línea" started.
+􀟈  Test "El flow salta de línea cuando no cabe" started.
+􀟈  Test "La última respuesta corresponde a la última consulta" started.
+􀟈  Test case passing 1 argument ancho → 280.0 to "El flow salta de línea cuando no cabe" started.
+􀟈  Test case passing 1 argument ancho → 390.0 to "El flow salta de línea cuando no cabe" started.
+􀟈  Test case passing 1 argument ancho → 320.0 to "El flow salta de línea cuando no cabe" started.
+􁁛  Test "Un solo elemento más ancho que el contenedor no salta de línea" passed after 0.001 seconds.
+􁁛  Test "El flow salta de línea cuando no cabe" with 3 test cases passed after 0.001 seconds.
+􁁛  Suite "FlowLayout" passed after 0.001 seconds.
+􁁛  Test "La última respuesta corresponde a la última consulta" passed after 0.453 seconds.
+􁁛  Suite "Orden de respuestas de búsqueda" passed after 0.454 seconds.
+􁁛  Test run with 3 tests in 2 suites passed after 0.454 seconds.
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀙟  Suite "Identidad en ForEach" skipped: "Pendiente de host de vista (V2)"
+􀟈  Suite "FeedModel" started.
+􀙟  Test "Insertar al principio no mueve el estado de despliegue a otra fila" skipped: "Pendiente de host de vista (V2)"
+􀟈  Test "Un cambio que la interfaz sí muestra invalida" started.
+􀟈  Test "Un ping que solo cambia campos invisibles no invalida" started.
+􁁛  Test "Un ping que solo cambia campos invisibles no invalida" passed after 0.062 seconds.
+􁁛  Test "Un cambio que la interfaz sí muestra invalida" passed after 0.062 seconds.
+􁁛  Suite "FeedModel" passed after 0.062 seconds.
+􁁛  Test run with 3 tests in 2 suites passed after 0.062 seconds.
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀙟  Suite "FeatureFlags en el entorno" skipped: "H9: exit test no verificado, ver comentario"
+􀟈  Suite "Checkout" started.
+􀟈  Suite "Ownership del modelo de checkout" started.
+􀟈  Test "El total incluye envío cuando no llega al mínimo" started.
+􀟈  Test "Notifica al añadir" started.
+􀙟  Test "Leer FeatureFlags no opcional sin inyección aborta" skipped: "H9: exit test no verificado, ver comentario"
+􀟈  Test "Aplicar cupón inválido lanza" started.
+􀟈  Test "El total no incluye envío a partir del mínimo" started.
+􀟈  Test "Formato de precio" started.
+􀟈  Test "La vista sigue usando el mismo modelo cuando el padre se actualiza" started.
+􀟈  Test case passing 2 arguments centimos → 100000, parteNumerica → "1000,00" to "Formato de precio" started.
+􀟈  Test case passing 2 arguments centimos → 0, parteNumerica → "0,00" to "Formato de precio" started.
+􁁛  Test "Notifica al añadir" passed after 0.001 seconds.
+􀟈  Test case passing 2 arguments centimos → 1999, parteNumerica → "19,99" to "Formato de precio" started.
+CheckoutView: @self, @identity, _modelo, _flagsInyectados changed.
+􁁛  Test "Aplicar cupón inválido lanza" passed after 0.126 seconds.
+􁁛  Test "El total incluye envío cuando no llega al mínimo" passed after 0.126 seconds.
+􁁛  Test "El total no incluye envío a partir del mínimo" passed after 0.127 seconds.
+􁁛  Test "Formato de precio" with 3 test cases passed after 0.127 seconds.
+􁁛  Suite "Checkout" passed after 0.127 seconds.
+CheckoutView: \FeatureFlags.bannerPromo, @self changed.
+CheckoutView: \FeatureFlags.bannerPromo, @self changed.
+CheckoutView: \FeatureFlags.bannerPromo, @self changed.
+CheckoutView: \FeatureFlags.bannerPromo, @self changed.
+CheckoutView: \FeatureFlags.bannerPromo, @self changed.
+􁁛  Test "La vista sigue usando el mismo modelo cuando el padre se actualiza" passed after 0.353 seconds.
+􁁛  Suite "Ownership del modelo de checkout" passed after 0.353 seconds.
+􁁛  Test run with 7 tests in 3 suites passed after 0.353 seconds.

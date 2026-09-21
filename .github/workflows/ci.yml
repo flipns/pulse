@@ -1,0 +1,58 @@
+name: Pulse
+on: [push, pull_request]
+
+jobs:
+  fix:
+    name: Variante correcta (todo verde)
+    runs-on: macos-15   # VERIFICAR: runner con Xcode 27 (V13)
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo xcode-select -s /Applications/Xcode_27.app
+      - run: swift build
+      - run: swift test
+
+  bug:
+    name: Variante con bug (fallan exactamente los casos esperados)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo xcode-select -s /Applications/Xcode_27.app
+
+      # La compilación SÍ debe ser verde también con el flag: el bug es de comportamiento,
+      # no de compilación. Si esto falla, el job falla.
+      - name: Compilar con PULSE_BUG
+        run: swift build -Xswiftc -DPULSE_BUG
+
+      # El criterio del libro no es "algo ha fallado", es "han fallado EXACTAMENTE estos
+      # casos y ninguno más". Un `exit 0` porque hubo cualquier fallo no demuestra nada.
+      - name: Comprobar que fallan exactamente las suites esperadas
+        run: |
+          set -o pipefail
+          swift test -Xswiftc -DPULSE_BUG 2>&1 | tee bug.log || true
+
+          fallo=0
+
+          # 1. Cada suite esperada tiene que haber fallado.
+          grep -q "Suite \"Orden de respuestas de búsqueda\" failed" bug.log || { echo "::error::cap9 no falló"; fallo=1; }
+          grep -q "Suite \"FeedModel\" failed" bug.log                     || { echo "::error::cap8 no falló"; fallo=1; }
+          grep -q "Suite \"Ownership del modelo de checkout\" failed" bug.log || { echo "::error::cap3/10 no falló"; fallo=1; }
+
+          # 2. Ninguna otra suite puede haber fallado.
+          inesperadas=$(grep -oE 'Suite "[^"]+" failed' bug.log \
+            | grep -vE 'Orden de respuestas de búsqueda|FeedModel|Ownership del modelo de checkout' || true)
+          if [ -n "$inesperadas" ]; then
+            echo "::error::han fallado suites no esperadas:"; echo "$inesperadas"; fallo=1
+          fi
+
+          # 3. La compilación de los tests no puede haberse roto.
+          if grep -q "error: Build failed" bug.log; then
+            echo "::error::la build de tests falló con PULSE_BUG"; fallo=1
+          fi
+
+          exit $fallo
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bug-log
+          path: bug.log

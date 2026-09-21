@@ -1,0 +1,91 @@
+Fetching https://github.com/apple/swift-async-algorithms from cache
+Fetching https://github.com/pointfreeco/swift-snapshot-testing from cache
+Fetching https://github.com/nalexn/ViewInspector from cache
+Fetched https://github.com/apple/swift-async-algorithms from cache (0.82s)
+Fetched https://github.com/nalexn/ViewInspector from cache (0.82s)
+Fetched https://github.com/pointfreeco/swift-snapshot-testing from cache (0.84s)
+Computing version for https://github.com/pointfreeco/swift-snapshot-testing
+Computed https://github.com/pointfreeco/swift-snapshot-testing at 1.19.5 (1.34s)
+Fetching https://github.com/pointfreeco/swift-custom-dump from cache
+Fetching https://github.com/swiftlang/swift-syntax from cache
+Fetched https://github.com/swiftlang/swift-syntax from cache (1.87s)
+Fetched https://github.com/pointfreeco/swift-custom-dump from cache (1.96s)
+Computing version for https://github.com/nalexn/ViewInspector
+Computed https://github.com/nalexn/ViewInspector at 0.10.3 (2.52s)
+Computing version for https://github.com/apple/swift-async-algorithms
+Computed https://github.com/apple/swift-async-algorithms at 1.1.5 (0.62s)
+Fetching https://github.com/apple/swift-collections.git from cache
+Fetched https://github.com/apple/swift-collections.git from cache (1.02s)
+Computing version for https://github.com/apple/swift-collections.git
+Computed https://github.com/apple/swift-collections.git at 1.6.0 (1.59s)
+Computing version for https://github.com/pointfreeco/swift-custom-dump
+Computed https://github.com/pointfreeco/swift-custom-dump at 1.7.3 (0.52s)
+Fetching https://github.com/pointfreeco/swift-issue-reporting from cache
+Fetched https://github.com/pointfreeco/swift-issue-reporting from cache (0.71s)
+Computing version for https://github.com/pointfreeco/swift-issue-reporting
+Computed https://github.com/pointfreeco/swift-issue-reporting at 2.1.0 (1.41s)
+Computing version for https://github.com/swiftlang/swift-syntax
+Computed https://github.com/swiftlang/swift-syntax at 604.0.0 (0.79s)
+Creating working copy for https://github.com/pointfreeco/swift-issue-reporting
+Working copy of https://github.com/pointfreeco/swift-issue-reporting resolved at 2.1.0
+Creating working copy for https://github.com/nalexn/ViewInspector
+Working copy of https://github.com/nalexn/ViewInspector resolved at 0.10.3
+Creating working copy for https://github.com/apple/swift-async-algorithms
+Working copy of https://github.com/apple/swift-async-algorithms resolved at 1.1.5
+Creating working copy for https://github.com/pointfreeco/swift-custom-dump
+Working copy of https://github.com/pointfreeco/swift-custom-dump resolved at 1.7.3
+Creating working copy for https://github.com/swiftlang/swift-syntax
+Working copy of https://github.com/swiftlang/swift-syntax resolved at 604.0.0
+Creating working copy for https://github.com/pointfreeco/swift-snapshot-testing
+Working copy of https://github.com/pointfreeco/swift-snapshot-testing resolved at 1.19.5
+Creating working copy for https://github.com/apple/swift-collections.git
+Working copy of https://github.com/apple/swift-collections.git resolved at 1.6.0
+Building for debugging...
+[Computing dependencies]
+[Pre-planning 1 / 620]
+[Planning deferred tasks]
+[98 / 210]
+[100 / 212] InternalCollectionsUtilities
+[102 / 225]
+[112 / 225] InternalCollectionsUtilities
+[119 / 225] InternalCollectionsUtilities
+[121 / 227] InternalCollectionsUtilities
+[133 / 249] OrderedCollections
+[142 / 249] PulseCore
+[149 / 318]
+[153 / 318]
+[159 / 318]
+[163 / 319]
+[175 / 330] DequeModule
+[182 / 330] DequeModule
+[186 / 330] OrderedCollections
+[195 / 330] DequeModule
+[195 / 330]
+[201 / 330]
+[204 / 330]
+[212 / 330]
+[221 / 331]
+[224 / 331]
+[235 / 342] AsyncAlgorithms
+[237 / 342]
+[238 / 342] AsyncAlgorithms
+[251 / 342]
+[256 / 342]
+[260 / 342] AsyncAlgorithms
+[264 / 342]
+[270 / 342] PulseCore
+[280 / 346] PulseCore
+[280 / 346] PulseLegacy
+[288 / 360] PulseCart
+[300 / 360] PulseLegacy
+[308 / 360] PulseFeed
+[317 / 360] PulseProduct
+[329 / 362] PulseCore-product
+[332 / 362] PulseCart
+[335 / 362] PulseProduct
+[340 / 367] PulseProduct
+[355 / 368] PulseCheckout
+[359 / 368] PulseDebug
+[361 / 370] PulseDebug
+[367 / 370] PulseDebug
+Build complete! (11,68 sec)

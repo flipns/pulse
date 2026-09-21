@@ -7,14 +7,14 @@ Cada línea se cierra con un *commit* que enlaza la evidencia (captura de Instru
 | # | Cap. | Qué verificar | Dónde | Estado |
 | :--- | :--- | :--- | :--- | :--- |
 | V1 | 2 | `-LogForEachSlowPath YES` en Xcode 27 con el `ForEach` de §2.7 | `PulseFeed/FeedList.swift`, esquema Debug | ☐ |
-| V2 | 2 | Experimento `ForEach` por índice frente a `id` estable con inserción al principio | `PulseFeedTests/IdentidadTests.swift` | ☐ |
+| V2 | 2 | Experimento `ForEach` por índice frente a `id` estable con inserción al principio | `PulseFeedTests/IdentidadTests.swift` | ☑ **Cerrada.** Caso discriminante: en `bug`, `["A→Promoción", "B→A", "C→B"]`; en `fix`, sin desajustes. Con dos controles (sin desajustes antes de insertar; la inserción provoca evaluaciones). Incorporado a §2.11. |
 | V3 | 3 | Macro `@State`: ¿evita reevaluar el inicializador? | `PulseCheckoutTests/OwnershipTests.swift` | ☑ **Cerrada.** Con valor en línea: 1 construcción tras 5 reconstrucciones. Asignado en `init`: 6. El estado persiste en ambas. Incorporado a §3.3 y §3.4. |
 | V4 | 3 | Las tres reglas de §3.3 producen los diagnósticos de TN3211 | `Tests/Compilacion/` (pendiente) | ☐ |
 | V5 | 4 | `PriceRow` con `.accessibility5` y 320 pt en preview redimensionable | `PulseProduct/PriceRow.swift` | ☐ |
 | V6 | 5 | `#expect(processExitsWith:)` sobre el `fatalError` de SwiftUI por `@Environment` sin inyección | `PulseCheckoutTests/FeatureFlagsTests.swift` | ☑ **Cerrada (H9).** Los *exit tests* funcionan en esta configuración: control con `fatalError` simple, caso SwiftUI y gemelo con inyección pasan, aislados y dentro de la ejecución completa (`docs/evidencia/H9/`). El `SIGTRAP` original venía, casi con seguridad, del test de ownership antiguo evaluando `CheckoutView` sin inyección en el proceso principal. El test es ahora el cuarto caso discriminante (cap. 5): pasa en `fix`, falla en `bug`. |
 | V7 | 6 | Disponibilidad de `@Animatable` / `@AnimatableIgnored` con target iOS 18 | `PulseCart/AddToCartButton.swift` | ☐ |
 | V8 | 6 | `.navigationTransition(.crossFade)` en `sheet` y `fullScreenCover` | pantalla de checkout | ☐ |
-| V9 | 7 | Llamadas a `sizeThatFits` por pase antes/después de `Cache` (signpost) | `PulseSearch/FlowLayout.swift` | ☐ |
+| V9 | 7 | Llamadas a `sizeThatFits` y mediciones de subvistas, con y sin `Cache` | `PulseSearchTests/FlowLayoutMedicionTests.swift` | ☑ **Cerrada.** Montaje inicial de 60 etiquetas: 7 llamadas a `sizeThatFits` y 2 a `placeSubviews` en las dos variantes; 540 mediciones sin caché (60 × 9), 60 con caché. **Corrige el libro**: §7.9 decía "cuatro llamadas por pase", cifra nunca medida. El contador suma todo el montaje, así que no se afirma una cifra por pase. |
 | V10 | 7 | `reorderable` / `reorderContainer` (iOS 27, *beta* al cierre) sobre `FlowLayout` | `PulseSearch/TagCloudView.swift` | ☐ |
 | V11 | 8 | fps antes/después del caso §8.8 en dispositivo | — | ⛔ **No aplicable en esta edición.** Sin dispositivo físico con iOS 27. §8.8 ya no promete una cifra: afirma solo la parte lógica, verificada por `FeedModelTests`, y da el protocolo para que el lector mida en su dispositivo. No se sustituye por el simulador (§8.2). |
 | V12 | 8 | `-warn-long-expression-type-checking=100` y el caso Charts de TN3211 con mínimo iOS 18 | `Package.swift` | ☐ |

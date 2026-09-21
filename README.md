@@ -4,11 +4,11 @@ App de referencia del libro *SwiftUI por dentro*. Cada capítulo tiene un caso d
 
 ## Estado
 
-**Compila y pasa sus tests con Xcode 27.** Evidencia en `docs/evidencia/`, generada sobre el árbol actual: `build6.log`, `test-fix4.log`, `test-bug4.log`. Las dependencias están fijadas a versión exacta y `Package.resolved` está en el repositorio (H12), así que una compilación limpia debería reproducir esos mismos resultados.
+**Compila y pasa sus tests con Xcode 27.** Evidencia en `docs/evidencia/`, generada sobre el árbol actual: `build6.log` (compilación), `test-fix5.log` y `test-bug6.log` (tests, con los cuatro casos discriminantes). Las dependencias están fijadas a versión exacta y `Package.resolved` está en el repositorio (H12), así que una compilación limpia debería reproducir esos mismos resultados.
 
 Lo que **sí** está verificado: que el árbol construye, que la variante correcta pasa en verde y que la variante con bug (`-DPULSE_BUG`) falla exactamente en las suites esperadas.
 
-Lo que **no** está verificado todavía: las comprobaciones que exigen dispositivo, previews o Instruments. Están en `docs/VERIFICACIONES.md` con su estado, y son la razón por la que algunas afirmaciones del libro dicen explícitamente "pendiente de verificación". Dos tests están deshabilitados a propósito: `IdentidadTests` (V2, necesita host de vista) y `FeatureFlagsTests` (H9, *exit test* no verificado; las causas están en el propio archivo).
+Lo que **no** está verificado todavía: las comprobaciones que exigen dispositivo, previews o Instruments. Están en `docs/VERIFICACIONES.md` con su estado, y son la razón por la que algunas afirmaciones del libro dicen explícitamente "pendiente de verificación". Un test está deshabilitado a propósito: `IdentidadTests` (V2, necesita host de vista).
 
 ## Estructura
 

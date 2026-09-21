@@ -1,5 +1,22 @@
 import SwiftUI
 import PulseCore
+import Synchronization
+
+#if DEBUG
+/// Sonda de V9 (cap. 7, §7.9): cuántas veces se llama a cada método del `Layout` y cuántas
+/// subvistas se miden. Los métodos de `Layout` son `nonisolated` (§7.2), así que el contador no
+/// puede vivir en el `MainActor`: va protegido con un `Mutex`, no con `nonisolated(unsafe)`.
+nonisolated enum RegistroLayout {
+    struct Cuenta: Sendable, Equatable {
+        var sizeThatFits = 0
+        var placeSubviews = 0
+        var medicionesDeSubvistas = 0
+    }
+    static let cuenta = Mutex(Cuenta())
+    static func reiniciar() { cuenta.withLock { $0 = Cuenta() } }
+    static var actual: Cuenta { cuenta.withLock { $0 } }
+}
+#endif
 
 // Libro: cap. 7, §7.2 y §7.3
 public struct FlowLayout: Layout {
@@ -11,17 +28,23 @@ public struct FlowLayout: Layout {
     public func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let id = Signposts.layout.makeSignpostID()
         let s = Signposts.layout.beginInterval("sizeThatFits", id: id)
+        #if DEBUG
+        RegistroLayout.cuenta.withLock { $0.sizeThatFits += 1 }
+        #endif
         defer { Signposts.layout.endInterval("sizeThatFits", s) }
         let ancho = proposal.replacingUnspecifiedDimensions().width
-        let marcos = distribuir(subviews.map { $0.sizeThatFits(.unspecified) }, anchoContenedor: ancho)
+        let marcos = distribuir(medir(subviews), anchoContenedor: ancho)
         return marcos.reduce(CGRect.zero) { $0.union($1) }.size
     }
 
     public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         let id = Signposts.layout.makeSignpostID()
         let s = Signposts.layout.beginInterval("placeSubviews", id: id)
+        #if DEBUG
+        RegistroLayout.cuenta.withLock { $0.placeSubviews += 1 }
+        #endif
         defer { Signposts.layout.endInterval("placeSubviews", s) }
-        let marcos = distribuir(subviews.map { $0.sizeThatFits(.unspecified) }, anchoContenedor: bounds.width)
+        let marcos = distribuir(medir(subviews), anchoContenedor: bounds.width)
         colocar(marcos, subviews, in: bounds)
     }
     #else
@@ -33,11 +56,11 @@ public struct FlowLayout: Layout {
     }
 
     public func makeCache(subviews: Subviews) -> Cache {
-        Cache(tamaños: subviews.map { $0.sizeThatFits(.unspecified) })
+        Cache(tamaños: medir(subviews))
     }
 
     public func updateCache(_ cache: inout Cache, subviews: Subviews) {
-        cache.tamaños = subviews.map { $0.sizeThatFits(.unspecified) }
+        cache.tamaños = medir(subviews)
         cache.ultimoAncho = nil
     }
 
@@ -52,6 +75,9 @@ public struct FlowLayout: Layout {
     public func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout Cache) -> CGSize {
         let id = Signposts.layout.makeSignpostID()
         let s = Signposts.layout.beginInterval("sizeThatFits", id: id)
+        #if DEBUG
+        RegistroLayout.cuenta.withLock { $0.sizeThatFits += 1 }
+        #endif
         defer { Signposts.layout.endInterval("sizeThatFits", s) }
         let ancho = proposal.replacingUnspecifiedDimensions(by: .init(width: 320, height: 10)).width
         return marcos(para: ancho, cache: &cache).reduce(CGRect.zero) { $0.union($1) }.size
@@ -60,10 +86,21 @@ public struct FlowLayout: Layout {
     public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout Cache) {
         let id = Signposts.layout.makeSignpostID()
         let s = Signposts.layout.beginInterval("placeSubviews", id: id)
+        #if DEBUG
+        RegistroLayout.cuenta.withLock { $0.placeSubviews += 1 }
+        #endif
         defer { Signposts.layout.endInterval("placeSubviews", s) }
         colocar(marcos(para: bounds.width, cache: &cache), subviews, in: bounds)
     }
     #endif
+
+    /// Mide el tamaño ideal de todas las subvistas. Es el trabajo que la caché evita repetir.
+    private func medir(_ subviews: Subviews) -> [CGSize] {
+        #if DEBUG
+        RegistroLayout.cuenta.withLock { $0.medicionesDeSubvistas += subviews.count }
+        #endif
+        return subviews.map { $0.sizeThatFits(.unspecified) }
+    }
 
     private func colocar(_ marcos: [CGRect], _ subviews: Subviews, in bounds: CGRect) {
         for (marco, subvista) in zip(marcos, subviews) {

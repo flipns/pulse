@@ -54,7 +54,13 @@ let package = Package(
                                    .product(name: "ViewInspector", package: "ViewInspector"),
                                    .product(name: "SnapshotTesting", package: "swift-snapshot-testing")],
                     swiftSettings: concurrencia),
-        .testTarget(name: "PulseSearchTests", dependencies: ["PulseSearch", "PulseCore"], swiftSettings: concurrencia),
-        .testTarget(name: "PulseFeedTests", dependencies: ["PulseFeed", "PulseCore"], swiftSettings: concurrencia),
+        .testTarget(name: "PulseSearchTests",
+                    dependencies: ["PulseSearch", "PulseCore",
+                                   .product(name: "ViewInspector", package: "ViewInspector")],   // V9
+                    swiftSettings: concurrencia),
+        .testTarget(name: "PulseFeedTests",
+                    dependencies: ["PulseFeed", "PulseCore",
+                                   .product(name: "ViewInspector", package: "ViewInspector")],   // V2
+                    swiftSettings: concurrencia),
     ]
 )

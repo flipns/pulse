@@ -4,7 +4,7 @@ App de referencia del libro *SwiftUI por dentro*. Cada capítulo tiene un caso d
 
 ## Estado
 
-**Compila y pasa sus tests con Xcode 27.** Evidencia en `docs/evidencia/`, generada sobre el árbol actual: `build6.log` (compilación), `test-fix6.log` y `test-bug7.log` (tests, con los seis casos discriminantes). Las dependencias están fijadas a versión exacta y `Package.resolved` está en el repositorio (H12), así que una compilación limpia debería reproducir esos mismos resultados.
+**Compila y pasa sus tests con Xcode 27.** Evidencia en `docs/evidencia/`, generada sobre el árbol actual: `test-fix6.log` y `test-bug7.log` (cada uno incluye la compilación; con los seis casos discriminantes). Las dependencias están fijadas a versión exacta y `Package.resolved` está en el repositorio (H12), así que una compilación limpia debería reproducir esos mismos resultados.
 
 Lo que **sí** está verificado: que el árbol construye, que la variante correcta pasa en verde y que la variante con bug (`-DPULSE_BUG`) falla exactamente en las suites esperadas.
 

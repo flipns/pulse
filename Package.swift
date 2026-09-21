@@ -9,6 +9,7 @@ let concurrencia: [SwiftSetting] = [
     .enableUpcomingFeature("NonisolatedNonsendingByDefault"),      // Approachable Concurrency (SE-0461)
     .enableUpcomingFeature("InferIsolatedConformances"),
     .unsafeFlags(["-Xfrontend", "-warn-long-expression-type-checking=100"], .when(configuration: .debug)), // cap. 8 §8.7
+    // PULSE_BUG_FLAG  ← scripts/tag-cases.sh sustituye esta línea por .define("PULSE_BUG") en las etiquetas capN-bug
 ]
 
 let package = Package(

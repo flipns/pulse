@@ -54,6 +54,39 @@ struct FeedModelTests {
         #expect(notificado == false)
     }
 
+    // P2 de la revisión externa: si la proyección tomara `Date.now` en cada ping, dos payloads
+    // iguales a los dos lados de un umbral de formato relativo ("ahora" → "hace 1 min") darían
+    // textos distintos y la vista se invalidaría igual. Este test cruza el umbral a propósito:
+    // los 90 segundos son de la fecha de referencia, no de espera real.
+    @Test("Un ping que cruza el umbral del minuto no invalida por sí solo")
+    func umbralDelMinutoNoInvalida() async throws {
+        let t0 = Date(timeIntervalSince1970: 1_800_000_000)
+        let base = [Articulo(titulo: "A", fecha: t0.addingTimeInterval(-30), vistas: 10)]
+        let modelo = FeedModel(repositorio: RepoStub(lista: base), referenciaTemporal: t0)
+        await modelo.aplicar(base)
+
+        var conMasVistas = base
+        conMasVistas[0].vistas += 1
+
+        // El reloj de pared avanza 90 s, pero el de presentación no: el ping no debe invalidar.
+        let notificado = try await observar(modelo) { await modelo.aplicar(conMasVistas) }
+        #expect(notificado == false)
+    }
+
+    // Control: el reloj de presentación sí avanza cuando lo movemos a propósito.
+    @Test("Refrescar los textos relativos sí invalida")
+    func refrescarSiInvalida() async throws {
+        let t0 = Date(timeIntervalSince1970: 1_800_000_000)
+        let base = [Articulo(titulo: "A", fecha: t0.addingTimeInterval(-30), vistas: 10)]
+        let modelo = FeedModel(repositorio: RepoStub(lista: base), referenciaTemporal: t0)
+        await modelo.aplicar(base)
+
+        let notificado = try await observar(modelo) {
+            await modelo.refrescarTextosRelativos(t0.addingTimeInterval(90))
+        }
+        #expect(notificado)
+    }
+
     @Test("Un cambio que la interfaz sí muestra invalida")
     func cambioVisibleInvalida() async throws {
         let base = articulosBase()

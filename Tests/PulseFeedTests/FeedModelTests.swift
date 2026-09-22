@@ -54,6 +54,11 @@ struct FeedModelTests {
         #expect(notificado == false)
     }
 
+    // Los dos tests que siguen describen una propiedad del modelo CORREGIDO, no distinguen
+    // `bug` de `fix`: la variante con bug publica el payload crudo y no proyecta nada, así que
+    // ni siquiera tiene reloj de presentación. Por eso se compilan solo aquí.
+    #if !PULSE_BUG
+
     // P2 de la revisión externa: si la proyección tomara `Date.now` en cada ping, dos payloads
     // iguales a los dos lados de un umbral de formato relativo ("ahora" → "hace 1 min") darían
     // textos distintos y la vista se invalidaría igual. Este test cruza el umbral a propósito:
@@ -86,6 +91,8 @@ struct FeedModelTests {
         }
         #expect(notificado)
     }
+
+    #endif
 
     @Test("Un cambio que la interfaz sí muestra invalida")
     func cambioVisibleInvalida() async throws {

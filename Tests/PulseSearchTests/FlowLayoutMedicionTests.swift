@@ -21,7 +21,9 @@ struct FlowLayoutMedicionTests {
         try await Task.sleep(for: .milliseconds(150))
 
         let c = RegistroLayout.actual
-        // Los números van al log: son el dato que §7.9 cita ("cuatro llamadas por pase").
+        // Los números se imprimen para documentar la medición concreta de este montaje.
+        // No son una propiedad estable de SwiftUI: en otra máquina salieron 7/1/480 en lugar
+        // de 7/2/540 (§7.9). Lo que el test comprueba es la relación, no las cifras.
         print("V9 — etiquetas: \(etiquetas.count) · sizeThatFits: \(c.sizeThatFits) · placeSubviews: \(c.placeSubviews) · mediciones de subvistas: \(c.medicionesDeSubvistas)")
 
         // Control: el layout se ha ejecutado de verdad.

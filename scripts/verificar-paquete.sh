@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# Comprueba que el repositorio y el manuscrito cuentan la misma historia.
+# Verifica CONTENIDO, no la forma de escribirlo: si mañana el CI se reescribe de otra manera
+# pero sigue exigiendo las seis suites y sus causas, este script debe seguir dando verde.
+set -uo pipefail
+fallo=0
+d() { echo "❌ $1"; fallo=1; }
+
+CI=.github/workflows/ci.yml
+LIBRO=docs/libro
+
+# --- Manuscrito
+ESPERADAS_APENDICE=57
+reales=$(grep -c '^- \*\*' "$LIBRO/Apéndice_A_Antipatrones.md" 2>/dev/null || echo 0)
+[ "$reales" = "$ESPERADAS_APENDICE" ] || d "El apéndice tiene $reales entradas y deberían ser $ESPERADAS_APENDICE (¿copia vieja en $LIBRO?)"
+grep -q "Seis de ellos" "$LIBRO/Capítulo_01.md" 2>/dev/null || d "El capítulo 1 de $LIBRO no es la versión con seis casos"
+if grep -rqF "cuatro llamadas por pase" "$LIBRO" Tests Sources 2>/dev/null; then
+  d "Queda la cifra retirada de §7.9 en: $(grep -rlF 'cuatro llamadas por pase' "$LIBRO" Tests Sources | tr '\n' ' ')"
+fi
+
+# --- CI: las seis suites, por nombre
+for suite in \
+  "Identidad en ForEach" \
+  "Ownership del modelo de checkout" \
+  "FeatureFlags en el entorno" \
+  "Mediciones del FlowLayout" \
+  "FeedModel" \
+  "Orden de respuestas de búsqueda"
+do
+  grep -qF "$suite" "$CI" || d "El CI no menciona la suite: $suite"
+done
+
+# --- CI: las seis huellas de causa (el criterio del libro no es el color del test)
+for causa in 'A→Promoción' 'RegistroCheckout.enUso == primero' 'SIGTRAP' 'mide en cada llamada' 'notificado → true' 'resultados = \["q-za"\]'
+do
+  grep -qF "$(printf '%b' "${causa//\\/}")" "$CI" 2>/dev/null || grep -qF "$causa" "$CI" || d "El CI no comprueba la causa: $causa"
+done
+
+grep -q "runs-on: xcode-27\|runs-on: macos-26" "$CI" || d "El CI no usa un runner con macOS 26 (el paquete exige .macOS(.v26))"
+
+# --- Paquete
+grep -q "// PULSE_BUG_FLAG" Package.swift || d "Falta el marcador PULSE_BUG_FLAG en Package.swift"
+grep -q 'exact:' Package.swift || d "Las dependencias no están fijadas a versión exacta"
+[ -f Package.resolved ] || d "Falta Package.resolved"
+if git rev-parse --git-dir >/dev/null 2>&1; then
+  git diff --quiet && git diff --cached --quiet || d "Hay cambios sin commitear"
+else
+  echo "ℹ️  No es un repositorio git: me salto la comprobación de commits"
+fi
+
+[ $fallo -eq 0 ] && echo "✅ Paquete coherente" || echo "Revisa lo anterior antes de etiquetar"
+exit $fallo

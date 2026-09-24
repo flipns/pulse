@@ -1,55 +1,88 @@
 name: Pulse
+
 on: [push, pull_request]
 
+# El paquete declara `platforms: [.iOS(.v18), .macOS(.v26)]`, así que el runner tiene que ser
+# macOS 26 o posterior: cambiar el compilador con xcode-select no cambia la versión del sistema.
+# La imagen `xcode-27` es la que trae Xcode 27 sobre macOS 26.
+env:
+  IMAGEN: xcode-27
+
 jobs:
-  fix:
-    name: Variante correcta (todo verde)
-    runs-on: macos-15   # VERIFICAR: runner con Xcode 27 (V13)
+  entorno:
+    name: Entorno
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v4
-      - run: sudo xcode-select -s /Applications/Xcode_27.app
+      # El log debe decir sobre qué se ha ejecutado: si un día cambia la imagen, se ve aquí.
+      - name: Versiones
+        run: |
+          sw_vers
+          ls /Applications | grep -i "^Xcode" || true
+          xcodebuild -version
+          swift --version
+
+  fix:
+    name: Variante correcta (todo verde)
+    runs-on: xcode-27
+    steps:
+      - uses: actions/checkout@v4
       - run: swift build
       - run: swift test
 
   bug:
-    name: Variante con bug (fallan exactamente los casos esperados)
-    runs-on: macos-15
+    name: Variante con bug (fallan exactamente los seis casos, y por su causa)
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v4
-      - run: sudo xcode-select -s /Applications/Xcode_27.app
 
-      # La compilación SÍ debe ser verde también con el flag: el bug es de comportamiento,
-      # no de compilación. Si esto falla, el job falla.
+      # La compilación también debe ser verde con el flag: el bug es de comportamiento.
       - name: Compilar con PULSE_BUG
         run: swift build -Xswiftc -DPULSE_BUG
 
-      # El criterio del libro no es "algo ha fallado", es "han fallado EXACTAMENTE estos
-      # casos y ninguno más". Un `exit 0` porque hubo cualquier fallo no demuestra nada.
-      - name: Comprobar que fallan exactamente las suites esperadas
+      - name: Ejecutar la variante con bug
         run: |
           set -o pipefail
           swift test -Xswiftc -DPULSE_BUG 2>&1 | tee bug.log || true
 
+      # 1. Las seis suites esperadas tienen que fallar.
+      - name: Fallan las seis suites esperadas
+        run: |
           fallo=0
+          comprobar() {
+            grep -q "Suite \"$1\" failed" bug.log || { echo "::error::no falló la suite de $2: $1"; fallo=1; }
+          }
+          comprobar "Identidad en ForEach"                 "cap. 2"
+          comprobar "Ownership del modelo de checkout"     "cap. 3"
+          comprobar "FeatureFlags en el entorno"           "cap. 5"
+          comprobar "Mediciones del FlowLayout"            "cap. 7"
+          comprobar "FeedModel"                            "cap. 8"
+          comprobar "Orden de respuestas de búsqueda"      "cap. 9"
+          exit $fallo
 
-          # 1. Cada suite esperada tiene que haber fallado.
-          grep -q "Suite \"Orden de respuestas de búsqueda\" failed" bug.log || { echo "::error::cap9 no falló"; fallo=1; }
-          grep -q "Suite \"FeedModel\" failed" bug.log                     || { echo "::error::cap8 no falló"; fallo=1; }
-          grep -q "Suite \"Ownership del modelo de checkout\" failed" bug.log || { echo "::error::cap3/10 no falló"; fallo=1; }
-          grep -q "Suite \"FeatureFlags en el entorno\" failed" bug.log    || { echo "::error::cap5 no falló"; fallo=1; }
-
-          # 2. Ninguna otra suite puede haber fallado.
+      # 2. Ninguna otra suite puede fallar.
+      - name: No falla ninguna suite inesperada
+        run: |
           inesperadas=$(grep -oE 'Suite "[^"]+" failed' bug.log \
-            | grep -vE 'Orden de respuestas de búsqueda|FeedModel|Ownership del modelo de checkout|FeatureFlags en el entorno' || true)
-          if [ -n "$inesperadas" ]; then
-            echo "::error::han fallado suites no esperadas:"; echo "$inesperadas"; fallo=1
-          fi
+            | grep -vE 'Identidad en ForEach|Ownership del modelo de checkout|FeatureFlags en el entorno|Mediciones del FlowLayout|FeedModel|Orden de respuestas de búsqueda' || true)
+          if [ -n "$inesperadas" ]; then echo "::error::suites no esperadas:"; echo "$inesperadas"; exit 1; fi
 
-          # 3. La compilación de los tests no puede haberse roto.
-          if grep -q "error: Build failed" bug.log; then
-            echo "::error::la build de tests falló con PULSE_BUG"; fallo=1
-          fi
-
+      # 3. Y tienen que fallar POR SU CAUSA. El criterio del libro no es el color del test:
+      #    un caso puede seguir en rojo por un motivo distinto del que el texto explica, y eso
+      #    ya nos pasó una vez con el caso del capítulo 9 (fallaba por prematuridad, no por
+      #    desorden). Estas cadenas son la huella de cada causa.
+      - name: Cada fallo conserva su causa
+        run: |
+          fallo=0
+          causa() {
+            grep -qF "$1" bug.log || { echo "::error::$2 falla, pero no por su causa (no aparece: $1)"; fallo=1; }
+          }
+          causa 'A→Promoción'                                   "cap. 2: el nodo se reutiliza para otro artículo"
+          causa 'RegistroCheckout.enUso == primero'             "cap. 3: la vista usa otra instancia del modelo"
+          causa 'SIGTRAP'                                       "cap. 5: el hijo aborta sin la inyección"
+          causa 'mide en cada llamada'                          "cap. 7: se remiden las subvistas"
+          causa 'notificado → true'                             "cap. 8: un campo invisible invalida"
+          causa 'resultados = ["q-za"]'                         "cap. 9: gana la respuesta antigua"
           exit $fallo
 
       - uses: actions/upload-artifact@v4

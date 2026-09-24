@@ -51,9 +51,10 @@ struct FilaFeed: View, Equatable {
 #endif
 
 // Libro: cap. 2, §2.7 — ForEach cuyos elementos producen un número variable de vistas (V1)
-struct FeedSlowPathDemo: View {
+public struct FeedSlowPathDemo: View {
     let items: [Articulo]
-    var body: some View {
+    public init(items: [Articulo]) { self.items = items }
+    public var body: some View {
         List {
             ForEach(items) { item in
                 #if PULSE_BUG

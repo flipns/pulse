@@ -33,12 +33,17 @@ nonisolated struct Producto: Sendable, Identifiable, Equatable {
 actor CatalogoService {
     private var cache: [String: [Producto]] = [:]
     private let session: URLSession
+    private let base: URL
 
-    init(session: URLSession = .shared) { self.session = session }
+    init(session: URLSession = .shared, base: URL = URL(string: "https://api.pulse.example")!) {
+        self.session = session; self.base = base
+    }
 
     func buscar(_ consulta: String) async throws -> [Producto] {
         if let cacheados = cache[consulta] { return cacheados }
-        let (datos, _) = try await session.data(from: URL.busqueda(consulta))
+        let url = base.appending(path: "search")
+                      .appending(queryItems: [.init(name: "q", value: consulta)])
+        let (datos, _) = try await session.data(from: url)
         let productos = try JSONDecoder().decode([Producto].self, from: datos)
         cache[consulta] = productos
         return productos

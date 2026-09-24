@@ -38,6 +38,17 @@ done
 
 grep -q "runs-on: xcode-27\|runs-on: macos-26" "$CI" || d "El CI no usa un runner con macOS 26 (el paquete exige .macOS(.v26))"
 
+# --- Evidencia: nombres fijos, y cada log citado existe
+for f in docs/evidencia/test-fix.log docs/evidencia/test-bug.log; do
+  [ -f "$f" ] || d "Falta la evidencia vigente: $f"
+done
+numerados=$(grep -rnoE "test-(fix|bug)[0-9]+\.log|build[0-9]+\.log" README.md docs/VERIFICACIONES.md Package.swift .github Sources Tests docs/libro 2>/dev/null || true)
+[ -z "$numerados" ] || d "Se citan logs numerados (deben citarse test-fix.log / test-bug.log): $numerados"
+for citado in $(grep -rhoE "docs/evidencia/[A-Za-z0-9_./-]+\.log" README.md docs/VERIFICACIONES.md 2>/dev/null | sort -u); do
+  [ -f "$citado" ] || d "Se cita un log que no existe: $citado"
+done
+[ -f docs/evidencia/test-fix.log ] && ! grep -q "Test run with .* passed" docs/evidencia/test-fix.log && d "test-fix.log no termina en verde"
+
 # --- Paquete
 grep -q "// PULSE_BUG_FLAG" Package.swift || d "Falta el marcador PULSE_BUG_FLAG en Package.swift"
 grep -q 'exact:' Package.swift || d "Las dependencias no están fijadas a versión exacta"

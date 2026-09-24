@@ -27,7 +27,7 @@ let package = Package(
     ],
     dependencies: [
         // Versiones EXACTAS, no rangos (H12). Son las que resolvieron y compilaron en la
-        // verificación con Xcode 27 (docs/evidencia/build5.log). Un repositorio que acompaña a
+        // verificación con Xcode 27 (ver docs/evidencia/). Un repositorio que acompaña a
         // un libro tiene que compilar igual dentro de un año: con `from:`, cualquier versión
         // nueva de una dependencia —incluida una publicada rota— entra sin que toquemos nada.
         // Package.resolved también está en el repositorio, por la misma razón.

@@ -209,8 +209,9 @@ final class SearchModel {
     private let catalogo: CatalogoService
 
     func consultaCambio() {
+        let consultaLanzada = consulta
         Task {
-            let r = try? await catalogo.buscar(consulta)
+            let r = try? await catalogo.buscar(consultaLanzada)
             resultados = r ?? []
         }
     }
@@ -223,6 +224,8 @@ TextField("Buscar", text: $modelo.consulta)
 ```
 
 Compila con concurrencia estricta. La `Task` hereda el `MainActor`, `catalogo` es un actor, `Producto` es `Sendable`. Todo correcto según el compilador.
+
+Fíjate en que la consulta se copia **antes** de lanzar la tarea. Es un detalle que parece menor y no lo es: si la `Task` leyera `consulta` por dentro, usaría el valor que tenga la propiedad cuando llegue a ejecutarse, no el que tenía cuando se lanzó. A veces buscaría lo que el usuario escribió y a veces lo que escribió después, y el bug que viene a continuación aparecería o no según unos milisegundos. Eso es un segundo bug encima del primero, y además uno que convierte cualquier intento de reproducirlo en una lotería: **si tu reproducción depende de cuándo arranca una tarea, no es una reproducción, es una carrera.**
 
 ### El bug
 

@@ -11,8 +11,14 @@ public final class SearchModel {
     public init(catalogo: any CatalogoProveedor) { self.catalogo = catalogo }
 
     public func consultaCambio() {
+        // Se captura la consulta ANTES de lanzar la tarea. Si se leyera `consulta` dentro de la
+        // Task, la búsqueda usaría el valor que tenga la propiedad cuando la tarea llegue a
+        // ejecutarse, no el que tenía al lanzarla: a veces buscaría la consulta equivocada y el
+        // desorden aparecería o no según el momento. El bug que ilustra §9.9 es la Task no
+        // estructurada sin cancelación ni comprobación al volver; no esa carrera añadida.
+        let consultaLanzada = consulta
         Task {
-            let r = try? await catalogo.buscar(consulta)
+            let r = try? await catalogo.buscar(consultaLanzada)
             resultados = r ?? []
         }
     }

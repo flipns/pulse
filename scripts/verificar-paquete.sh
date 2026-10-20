@@ -10,7 +10,7 @@ CI=.github/workflows/ci.yml
 LIBRO=docs/libro
 
 # --- Manuscrito
-ESPERADAS_APENDICE=57
+ESPERADAS_APENDICE=58
 reales=$(grep -c '^- \*\*' "$LIBRO/Apéndice_A_Antipatrones.md" 2>/dev/null || echo 0)
 [ "$reales" = "$ESPERADAS_APENDICE" ] || d "El apéndice tiene $reales entradas y deberían ser $ESPERADAS_APENDICE (¿copia vieja en $LIBRO?)"
 grep -q "Seis de ellos" "$LIBRO/Capítulo_01.md" 2>/dev/null || d "El capítulo 1 de $LIBRO no es la versión con seis casos"
@@ -48,6 +48,12 @@ for citado in $(grep -rhoE "docs/evidencia/[A-Za-z0-9_./-]+\.log" README.md docs
   [ -f "$citado" ] || d "Se cita un log que no existe: $citado"
 done
 [ -f docs/evidencia/test-fix.log ] && ! grep -q "Test run with .* passed" docs/evidencia/test-fix.log && d "test-fix.log no termina en verde"
+
+# --- Repositorios anidados: git archive no incluye su contenido
+if git rev-parse --git-dir >/dev/null 2>&1; then
+  anidados=$(git ls-files -s | awk '$1 == "160000" {print $4}')
+  [ -z "$anidados" ] || d "Hay repositorios anidados que no entrarán en el paquete: $anidados"
+fi
 
 # --- Paquete
 grep -q "// PULSE_BUG_FLAG" Package.swift || d "Falta el marcador PULSE_BUG_FLAG en Package.swift"

@@ -1,137 +1,92 @@
 Building for debugging...
 [Computing dependencies]
 [Using on-disk description]
-[1 / 5]
-[2 / 6] PulseCore
-[3 / 7] PulseCore
-[7 / 11] PulseCart
-[8 / 12] PulseCart
-[12 / 16] PulseCheckout
-[13 / 17] PulseCheckout
-[18 / 22] ViewInspector
-[19 / 23] ViewInspector
-[22 / 26] SnapshotTesting
-[23 / 27] SnapshotTesting
-[29 / 33] PulseCore
-[32 / 36] PulseCart
-[36 / 40] PulseCheckout
-[48 / 52] ViewInspector
-[59 / 63] SnapshotTesting
-[62 / 65] PulseCheckoutTests-product
-[67 / 70] PulseCheckoutTests-product
-[72 / 74] PulseCheckoutTests-product
-[75 / 79] PulseFeed
-[76 / 80] PulseFeed
-[86 / 90] PulseFeed
-[89 / 93] PulseFeedTests-product
-[90 / 94] PulseFeedTests-product
-[94 / 98] PulseFeedTests-product
-[100 / 102] PulseFeedTests-product
-[103 / 107] InternalCollectionsUtilities
-[104 / 108] InternalCollectionsUtilities
-[107 / 111] OrderedCollections
-[108 / 112] OrderedCollections
-[112 / 116] ContainersPreview
-[115 / 119] DequeModule
-[116 / 120] DequeModule
-[119 / 123] AsyncAlgorithms
-[120 / 124] AsyncAlgorithms
-[123 / 127] PulseSearch
-[124 / 128] PulseSearch
-[138 / 142] InternalCollectionsUtilities
-[149 / 153] OrderedCollections
-[160 / 164] ContainersPreview
-[171 / 175] DequeModule
-[182 / 186] AsyncAlgorithms
-[186 / 190] PulseSearch
-[190 / 193] PulseSearchTests-product
-[195 / 198] PulseSearchTests-product
-[200 / 202] PulseSearchTests-product
-[209 / 224] PulseProduct
-[215 / 230] PulseProduct
-[227 / 233] PulseDebug
-Build complete! (17,36 sec)
-Test Suite 'All tests' started at 2026-09-24 23:53:33.672.
-Test Suite 'All tests' passed at 2026-09-24 23:53:33.680.
-	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.007) seconds
-Test Suite 'All tests' started at 2026-09-24 23:53:33.872.
-Test Suite 'All tests' passed at 2026-09-24 23:53:33.881.
+[2 / 6] PulseSearch
+[3 / 7] PulseSearch
+[7 / 10] PulseSearch
+[10 / 11] PulseSearchTests-product
+Build complete! (1,76 sec)
+Test Suite 'All tests' started at 2026-10-20 22:56:16.327.
+Test Suite 'All tests' passed at 2026-10-20 22:56:16.335.
 	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.009) seconds
-Test Suite 'All tests' started at 2026-09-24 23:53:34.076.
-Test Suite 'All tests' passed at 2026-09-24 23:53:34.112.
-	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.036) seconds
+Test Suite 'All tests' started at 2026-10-20 22:56:16.434.
+Test Suite 'All tests' passed at 2026-10-20 22:56:16.441.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.007) seconds
+Test Suite 'All tests' started at 2026-10-20 22:56:16.562.
+Test Suite 'All tests' passed at 2026-10-20 22:56:16.571.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.008) seconds
 􀟈  Test run started.
 􀄵  Testing Library Version: 2084
 􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "FlowLayout" started.
 􀟈  Suite "Mediciones del FlowLayout" started.
 􀟈  Suite "Orden de respuestas de búsqueda" started.
-􀟈  Suite "FlowLayout" started.
-􀟈  Test "La última respuesta corresponde a la última consulta" started.
-􀟈  Test "El layout no vuelve a medir las etiquetas en cada llamada" started.
-􀟈  Test "Un solo elemento más ancho que el contenedor no salta de línea" started.
 􀟈  Test "El flow salta de línea cuando no cabe" started.
-􀟈  Test case passing 1 argument ancho → 320.0 to "El flow salta de línea cuando no cabe" started.
-􀟈  Test case passing 1 argument ancho → 280.0 to "El flow salta de línea cuando no cabe" started.
+􀟈  Test "El layout no vuelve a medir las etiquetas en cada llamada" started.
+􀟈  Test "La última respuesta corresponde a la última consulta" started.
+􀟈  Test "Un solo elemento más ancho que el contenedor no salta de línea" started.
 􀟈  Test case passing 1 argument ancho → 390.0 to "El flow salta de línea cuando no cabe" started.
-􁁛  Test "Un solo elemento más ancho que el contenedor no salta de línea" passed after 0.126 seconds.
-􁁛  Test "El flow salta de línea cuando no cabe" with 3 test cases passed after 0.126 seconds.
-􁁛  Suite "FlowLayout" passed after 0.126 seconds.
+􀟈  Test case passing 1 argument ancho → 280.0 to "El flow salta de línea cuando no cabe" started.
+􀟈  Test case passing 1 argument ancho → 320.0 to "El flow salta de línea cuando no cabe" started.
+􁁛  Test "Un solo elemento más ancho que el contenedor no salta de línea" passed after 0.100 seconds.
+􁁛  Test "El flow salta de línea cuando no cabe" with 3 test cases passed after 0.100 seconds.
+􁁛  Suite "FlowLayout" passed after 0.100 seconds.
 V9 — etiquetas: 60 · sizeThatFits: 7 · placeSubviews: 2 · mediciones de subvistas: 60
-􁁛  Test "El layout no vuelve a medir las etiquetas en cada llamada" passed after 0.272 seconds.
-􁁛  Suite "Mediciones del FlowLayout" passed after 0.272 seconds.
-􁁛  Test "La última respuesta corresponde a la última consulta" passed after 0.550 seconds.
-􁁛  Suite "Orden de respuestas de búsqueda" passed after 0.551 seconds.
-􁁛  Test run with 4 tests in 3 suites passed after 0.551 seconds.
+􁁛  Test "El layout no vuelve a medir las etiquetas en cada llamada" passed after 0.253 seconds.
+􁁛  Suite "Mediciones del FlowLayout" passed after 0.254 seconds.
+􁁛  Test "La última respuesta corresponde a la última consulta" passed after 0.534 seconds.
+􁁛  Suite "Orden de respuestas de búsqueda" passed after 0.534 seconds.
+􁁛  Test run with 4 tests in 3 suites passed after 0.535 seconds.
 􀟈  Test run started.
 􀄵  Testing Library Version: 2084
 􀄵  Target Platform: arm64e-apple-macos14.0
-􀟈  Suite "Identidad en ForEach" started.
 􀟈  Suite "FeedModel" started.
+􀟈  Suite "Identidad en ForEach" started.
 􀟈  Test "Refrescar los textos relativos sí invalida" started.
-􀟈  Test "Insertar al principio no mueve el estado de una fila a otra" started.
 􀟈  Test "Un ping que solo cambia campos invisibles no invalida" started.
+􀟈  Test "Insertar al principio no mueve el estado de una fila a otra" started.
 􀟈  Test "Un ping que cruza el umbral del minuto no invalida por sí solo" started.
 􀟈  Test "Un cambio que la interfaz sí muestra invalida" started.
-􁁛  Test "Un ping que cruza el umbral del minuto no invalida por sí solo" passed after 0.151 seconds.
-􁁛  Test "Refrescar los textos relativos sí invalida" passed after 0.151 seconds.
-􁁛  Test "Un ping que solo cambia campos invisibles no invalida" passed after 0.151 seconds.
-􁁛  Test "Un cambio que la interfaz sí muestra invalida" passed after 0.151 seconds.
-􁁛  Suite "FeedModel" passed after 0.152 seconds.
-􁁛  Test "Insertar al principio no mueve el estado de una fila a otra" passed after 0.258 seconds.
-􁁛  Suite "Identidad en ForEach" passed after 0.259 seconds.
-􁁛  Test run with 5 tests in 2 suites passed after 0.259 seconds.
+􁁛  Test "Refrescar los textos relativos sí invalida" passed after 0.144 seconds.
+􁁛  Test "Un ping que solo cambia campos invisibles no invalida" passed after 0.144 seconds.
+􁁛  Test "Un cambio que la interfaz sí muestra invalida" passed after 0.143 seconds.
+􁁛  Test "Un ping que cruza el umbral del minuto no invalida por sí solo" passed after 0.144 seconds.
+􁁛  Suite "FeedModel" passed after 0.144 seconds.
+􁁛  Test "Insertar al principio no mueve el estado de una fila a otra" passed after 0.252 seconds.
+􁁛  Suite "Identidad en ForEach" passed after 0.253 seconds.
+􁁛  Test run with 5 tests in 2 suites passed after 0.253 seconds.
 􀟈  Test run started.
 􀄵  Testing Library Version: 2084
 􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Ownership del modelo de checkout" started.
 􀟈  Suite "FeatureFlags en el entorno" started.
 􀟈  Suite "Checkout" started.
-􀟈  Suite "Ownership del modelo de checkout" started.
-􀟈  Test "El total incluye envío cuando no llega al mínimo" started.
-􀟈  Test "El total no incluye envío a partir del mínimo" started.
-􀟈  Test "Con inyección, la vista no aborta (control)" started.
-􀟈  Test "Aplicar cupón inválido lanza" started.
-􀟈  Test "Notifica al añadir" started.
-􀟈  Test "Formato de precio" started.
-􀟈  Test "La vista sigue usando el mismo modelo cuando el padre se actualiza" started.
 􀟈  Test "Sin inyección, la vista no aborta" started.
-􀟈  Test case passing 2 arguments centimos → 100000, parteNumerica → "1000,00" to "Formato de precio" started.
-􀟈  Test case passing 2 arguments centimos → 0, parteNumerica → "0,00" to "Formato de precio" started.
+􀟈  Test "El total incluye envío cuando no llega al mínimo" started.
+􀟈  Test "La vista sigue usando el mismo modelo cuando el padre se actualiza" started.
+􀟈  Test "El total no incluye envío a partir del mínimo" started.
+􀟈  Test "Aplicar cupón inválido lanza" started.
+􀟈  Test "Formato de precio" started.
+􀟈  Test "Notifica al añadir" started.
+􀟈  Test "Con inyección, la vista no aborta (control)" started.
 􀟈  Test case passing 2 arguments centimos → 1999, parteNumerica → "19,99" to "Formato de precio" started.
-􁁛  Test "Notifica al añadir" passed after 0.001 seconds.
+􀟈  Test case passing 2 arguments centimos → 0, parteNumerica → "0,00" to "Formato de precio" started.
+􀟈  Test case passing 2 arguments centimos → 100000, parteNumerica → "1000,00" to "Formato de precio" started.
 CheckoutView: @self, @identity, _modelo, _flagsInyectados changed.
-􁁛  Test "El total no incluye envío a partir del mínimo" passed after 0.133 seconds.
-􁁛  Test "El total incluye envío cuando no llega al mínimo" passed after 0.133 seconds.
-􁁛  Test "Aplicar cupón inválido lanza" passed after 0.133 seconds.
-􁁛  Test "Formato de precio" with 3 test cases passed after 0.133 seconds.
-􁁛  Suite "Checkout" passed after 0.133 seconds.
-􁁛  Test "Con inyección, la vista no aborta (control)" passed after 0.139 seconds.
+􁁛  Test "Notifica al añadir" passed after 0.123 seconds.
+􁁛  Test "El total incluye envío cuando no llega al mínimo" passed after 0.130 seconds.
+􁁛  Test "El total no incluye envío a partir del mínimo" passed after 0.130 seconds.
+􁁛  Test "Aplicar cupón inválido lanza" passed after 0.130 seconds.
+􁁛  Test "Formato de precio" with 3 test cases passed after 0.130 seconds.
+􁁛  Suite "Checkout" passed after 0.130 seconds.
 CheckoutView: \FeatureFlags.bannerPromo, @self changed.
 CheckoutView: \FeatureFlags.bannerPromo, @self changed.
 CheckoutView: \FeatureFlags.bannerPromo, @self changed.
-􁁛  Test "Sin inyección, la vista no aborta" passed after 0.274 seconds.
-􁁛  Suite "FeatureFlags en el entorno" passed after 0.274 seconds.
+􁁛  Test "Con inyección, la vista no aborta (control)" passed after 0.266 seconds.
+􁁛  Test "Sin inyección, la vista no aborta" passed after 0.266 seconds.
+􁁛  Suite "FeatureFlags en el entorno" passed after 0.266 seconds.
 CheckoutView: \FeatureFlags.bannerPromo, @self changed.
 CheckoutView: \FeatureFlags.bannerPromo, @self changed.
-􁁛  Test "La vista sigue usando el mismo modelo cuando el padre se actualiza" passed after 0.358 seconds.
-􁁛  Suite "Ownership del modelo de checkout" passed after 0.358 seconds.
-􁁛  Test run with 8 tests in 3 suites passed after 0.359 seconds.
+􁁛  Test "La vista sigue usando el mismo modelo cuando el padre se actualiza" passed after 0.355 seconds.
+􁁛  Suite "Ownership del modelo de checkout" passed after 0.355 seconds.
+􁁛  Test run with 8 tests in 3 suites passed after 0.355 seconds.

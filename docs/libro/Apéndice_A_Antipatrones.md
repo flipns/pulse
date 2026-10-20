@@ -53,6 +53,7 @@ Extraído de los recuadros y los casos de los diez capítulos, más lo que la ve
 
 - **`DispatchQueue.main.async` en un modelo `@MainActor`.** Redundante y delata desconocimiento del actor actual. §9.2.
 - **`Task { }` suelto disparado desde `onChange`.** Sin cancelación ni vida ligada a la vista. §9.9.
+- **Leer una propiedad dentro de una `Task` en lugar de capturarla al lanzarla.** La tarea usa el valor que tenga la propiedad cuando llegue a ejecutarse, no el que tenía cuando se creó: el resultado depende de milisegundos. §9.9.
 - **Escritura tras un `await` sin comprobar que la pregunta sigue vigente.** Respuestas fuera de orden. §9.9.
 - **`do/catch` alrededor de `for await` sobre un publisher con `Failure == Never`.** Código muerto. §9.4.
 - **`nonisolated async` como sinónimo de "en segundo plano".** Con *Approachable Concurrency* hereda el actor del llamador; `@concurrent` es la única forma explícita. §8.5, §9.1.

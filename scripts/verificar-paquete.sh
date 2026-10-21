@@ -38,6 +38,12 @@ done
 
 grep -q "runs-on: xcode-27\|runs-on: macos-26" "$CI" || d "El CI no usa un runner con macOS 26 (el paquete exige .macOS(.v26))"
 
+# El CI ha llegado incompleto varias veces porque `.github` es una carpeta oculta y no se copia
+# desde el Finder. Se comprueba cada job que la documentación afirma que existe.
+for job in entorno fix estabilidad bug; do
+  grep -qE "^  $job:$" "$CI" || d "Al CI le falta el job '$job' (¿se copió .github desde el Finder?)"
+done
+
 # --- Evidencia: nombres fijos, y cada log citado existe
 for f in docs/evidencia/test-fix.log docs/evidencia/test-bug.log; do
   [ -f "$f" ] || d "Falta la evidencia vigente: $f"

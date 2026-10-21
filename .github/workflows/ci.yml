@@ -30,6 +30,38 @@ jobs:
       - run: swift build
       - run: swift test
 
+  estabilidad:
+    name: Estabilidad (cinco ejecuciones de cada variante, mismo resultado)
+    runs-on: xcode-27
+    # Un caso intermitente no se detecta ejecutándolo una vez: el de §9.9 pasó en `bug` una vez
+    # de cada varias porque la tarea leía la consulta tarde. Si algún caso depende del momento
+    # en que arranca una tarea, aquí se ve.
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift build && swift build -Xswiftc -DPULSE_BUG
+      - name: La variante correcta pasa cinco veces seguidas
+        run: |
+          for i in 1 2 3 4 5; do
+            swift test 2>&1 | tee fix-$i.log >/dev/null
+            grep -q "Test run with .* passed" fix-$i.log && ! grep -q "failed after" fix-$i.log \
+              || { echo "::error::la variante correcta falló en la ejecución $i"; exit 1; }
+          done
+      - name: La variante con bug falla cinco veces seguidas, siempre por su causa
+        run: |
+          for i in 1 2 3 4 5; do
+            swift test -Xswiftc -DPULSE_BUG 2>&1 | tee bug-$i.log >/dev/null || true
+            for causa in 'A→Promoción' 'RegistroCheckout.enUso == primero' 'SIGTRAP' \
+                         'mide en cada llamada' 'notificado → true' 'resultados = ["q-za"]'; do
+              grep -qF "$causa" bug-$i.log \
+                || { echo "::error::ejecución $i: falta la causa «$causa» (¿caso intermitente?)"; exit 1; }
+            done
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: estabilidad-logs
+          path: "*-[0-9].log"
+
   bug:
     name: Variante con bug (fallan exactamente los seis casos, y por su causa)
     runs-on: xcode-27
